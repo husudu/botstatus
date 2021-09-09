@@ -13,7 +13,7 @@ UPDATE_CHANNEL = int(os.environ.get("UPDATE_CHANNEL", None))
 MESSAGE_ID = int(os.environ.get("MESSAGE_ID", None))
 TIME_LIMIT = int(os.environ.get("TIME_LIMIT", "300"))
 SLEEP_TIME = int(os.environ.get("SLEEP_TIME", "30"))
-HEADING = os.environ.get("HEADING", "⚡--**Brend Botlarının İşləmə Statusu**--👨🏻‍🔧")
+HEADING = os.environ.get("HEADING", "⚡--**Brend Botlarının İşləmə Statusu**--👨🏻‍🔧\n\n🤖 **Bot :-** [BrendUserbot](t.me/BrendUserbot)\n⚜ Status :- Aktivdir ✅")
 ATTACH_LINK = os.environ.get("ATTACH_LINK", None)
 
 User = Client(SESSION_STRING, api_id=API_ID, api_hash=API_HASH)
@@ -35,13 +35,14 @@ def main():
                 message = User.get_history(bot, 1)[0]
                 if start_message.message_id == message.message_id:
                     print(f"[WARNING] @{bot} işləmir")
-                    status_text += f"\n🤖 **Bot :-** [{bot}](https://telegram.me/{bot})" \
+                    status_text += f"\n🤖 **Bot :-** [{bot}](t.me/{bot})" \
                                    f"\n⚜ **Status :-** `Deaktivdir` ❎\n"
-                    User.send_message(chat_id=BOT_OWNER, text=f"@{bot} status: `işləmir`")
+                    User.send_message(chat_id=BOT_OWNER, text=f"❌ @{bot} `İşləmir`")
                 else:
                     print(f"[INFO] @{bot} Hərşey yaxşıdır")
-                    status_text += f"\n🤖 **Bot :-**[{bot}](https://telegram.me/{bot}) " \
+                    status_text += f"\n🤖 **Bot :-**[{bot}](t.me/{bot}) " \
                                  f"\n**⚜ Status :-** `Aktivdir` ✅\n"
+                    User.send_message(chat_id=BOT_OWNER, text=f"✅ @{bot} `İşləyir`")
                 User.read_history(bot)
             limit = TIME_LIMIT // 60
             utc_now = datetime.datetime.now(pytz.timezone('UTC')).strftime("%I:%M %p %d/%m/%y")
