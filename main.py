@@ -45,9 +45,9 @@ def main():
                     User.send_message(chat_id=BOT_OWNER, text=f"✅ @{bot} `İşləyir`")
                 User.read_history(bot)
             limit = TIME_LIMIT // 60
-            utc_now = datetime.datetime.now(pytz.timezone('UTC')).strftime("%I:%M %p %d/%m/%y")
-            status_text += f"\n⏱️**Son yoxlanış:**\n{str(utc_now)} UTC ⏰"
-            status_text += f"\n📈`Bu status Hər {limit} saatda yenilənir`"
+            az_now = datetime.datetime.now(pytz.timezone('Asia/Baku')).strftime("%I:%M:%S %p %d/%m/%y")
+            status_text += f"\n⏱️**Son yoxlanış:**\n🇦🇿 Saat: {str(az_now)}"
+            status_text += f"\n👨🏻‍🔧`Bu status Hər saat yenilənir`"
             try:
                 User.edit_message_text(chat_id=UPDATE_CHANNEL, message_id=MESSAGE_ID, text=status_text, disable_web_page_preview=hide_preview)
                 print(f"[INFO] hər şey edildi!  {limit} saat yatmaq...")
