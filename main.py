@@ -14,7 +14,7 @@ MESSAGE_ID = int(os.environ.get("MESSAGE_ID", None))
 TIME_LIMIT = int(os.environ.get("TIME_LIMIT", "300"))
 SLEEP_TIME = int(os.environ.get("SLEEP_TIME", "30"))
 HEADING = os.environ.get("HEADING", "⚡--**Brend Botlarının İşləmə Statusu**--👨🏻‍🔧\n\n🤖 **Bot :-** [BrendUserbot](t.me/BrendUserbot)\n⚜ Status :- Aktivdir ✅")
-ATTACH_LINK = os.environ.get("ATTACH_LINK", None)
+ATTACH_LINK = os.environ.get("ATTACH_LINK", "t.me/BrendOwner")
 
 User = Client(SESSION_STRING, api_id=API_ID, api_hash=API_HASH)
 
