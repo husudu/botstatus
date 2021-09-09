@@ -8,7 +8,6 @@ SESSION_STRING = os.environ.get("SESSION_STRING", None)
 API_ID = int(os.environ.get("API_ID", None))
 API_HASH = os.environ.get("API_HASH", None)
 BOTS = [i.strip() for i in os.environ.get("BOTS", None).split()]
-BOT_NAME = [i.strip() for i in os.environ.get("BOT_NAME", None).split()]
 BOT_OWNER = os.environ.get("BOT_OWNER", None)
 UPDATE_CHANNEL = int(os.environ.get("UPDATE_CHANNEL", None))
 MESSAGE_ID = int(os.environ.get("MESSAGE_ID", None))
@@ -36,14 +35,12 @@ def main():
                 message = User.get_history(bot, 1)[0]
                 if start_message.message_id == message.message_id:
                     print(f"[WARNING] @{bot} işləmir")
-                    status_text += f"\n🤖 **Bot :-** {BOT_NAME}" \
-                                   f"\n📧 **Link:-**  [{bot}](https://telegram.me/{bot}" \
+                    status_text += f"\n🤖 **Bot :-** [{bot}](https://telegram.me/{bot})" \
                                    f"\n⚜ **Status :-** `Deaktivdir` ❎\n"
                     User.send_message(chat_id=BOT_OWNER, text=f"@{bot} status: `işləmir`")
                 else:
                     print(f"[INFO] @{bot} Hərşey yaxşıdır")
-                    status_text += f"\n🤖 **Ad :- {BOT_NAME}**" \
-                                 f"\n📧 **Link:-**  [{bot}](https://telegram.me/{bot}" \
+                    status_text += f"\n🤖 **Bot :-**[{bot}](https://telegram.me/{bot}) " \
                                  f"\n**⚜ Status :-** `Aktivdir` ✅\n"
                 User.read_history(bot)
             limit = TIME_LIMIT // 60
