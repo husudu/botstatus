@@ -8,13 +8,12 @@ SESSION_STRING = os.environ.get("SESSION_STRING", None)
 API_ID = int(os.environ.get("API_ID", None))
 API_HASH = os.environ.get("API_HASH", None)
 BOTS = [i.strip() for i in os.environ.get("BOTS", None).split()]
-BOT_OWNER = os.environ.get("BOT_OWNER", None)
+BOT_OWNER = int(os.environ.get("BOT_OWNER", -1001456954154))
 UPDATE_CHANNEL = int(os.environ.get("UPDATE_CHANNEL", None))
 MESSAGE_ID = int(os.environ.get("MESSAGE_ID", None))
 TIME_LIMIT = int(os.environ.get("TIME_LIMIT", "300"))
-SLEEP_TIME = int(os.environ.get("SLEEP_TIME", "30"))
-HEADING = os.environ.get("HEADING", "⚡--**Brend Botlarının İşləmə Statusu**--👨🏻‍🔧\n\n🤖 **Bot :-** [BrendUserbot](t.me/BrendUserbot)\n⚜ Status :- Aktivdir ✅")
-ATTACH_LINK = os.environ.get("ATTACH_LINK", "t.me/BrendOwner")
+SLEEP_TIME = int(os.environ.get("SLEEP_TIME", "3"))
+HEADING = os.environ.get("HEADING", "⚡**Brend Botlarının İşləmə Statusu**\n\n")
 
 User = Client(SESSION_STRING, api_id=API_ID, api_hash=API_HASH)
 
@@ -39,10 +38,8 @@ def main():
                                    f"\n⚜ **Status :-** `Deaktivdir` ❎\n"
                     User.send_message(chat_id=BOT_OWNER, text=f"❌ @{bot} `İşləmir`")
                 else:
-                    print(f"[INFO] @{bot} Hərşey yaxşıdır")
                     status_text += f"\n🤖 **Bot :-**[{bot}](t.me/{bot}) " \
                                  f"\n**⚜ Status :-** `Aktivdir` ✅\n"
-                    User.send_message(chat_id=BOT_OWNER, text=f"✅ @{bot} `İşləyir`")
                 User.read_history(bot)
             limit = TIME_LIMIT // 60
             az_now = datetime.datetime.now(pytz.timezone('Asia/Baku')).strftime("%I:%M:%S %p %d/%m/%y")
@@ -59,7 +56,6 @@ def main():
 
 
 if SESSION_STRING and API_HASH and API_ID and BOTS and BOT_OWNER and UPDATE_CHANNEL and MESSAGE_ID:
-    print("Bot yaxşı işləyir")
     main()
 else:
     print("Tam dəyişənləri doldurun")
