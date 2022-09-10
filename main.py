@@ -20,26 +20,20 @@ User = Client(SESSION_STRING, api_id=API_ID, api_hash=API_HASH)
 def main():
     with User:
         while True:
-            print("[INFO] Botların yoxlanışı başladı..")
-            if ATTACH_LINK:
-                hide_preview = False
-                status_text = f"[\u2063]({ATTACH_LINK})" + HEADING + "\n"
-            else:
-                hide_preview = True
-                status_text = HEADING + "\n"
+            hide_preview = True
+            status_text = HEADING + "\n"
             for bot in BOTS:
-                print(f"[INFO] @{bot} yoxlanılır")
                 start_message = User.send_message(chat_id=bot, text='/start')
                 time.sleep(SLEEP_TIME)
                 message = User.get_history(bot, 1)[0]
                 if start_message.message_id == message.message_id:
                     print(f"[WARNING] @{bot} işləmir")
-                    status_text += f"\n🤖 **Bot :-** [{bot}](t.me/{bot})" \
-                                   f"\n⚜ **Status :-** `Deaktivdir` ❎\n"
+                    status_text += f"\n🤖 **Bot:** [{bot}](t.me/{bot})" \
+                                   f"\n⚜ **Status:** `Deaktivdir` ❌\n"
                     User.send_message(chat_id=BOT_OWNER, text=f"❌ @{bot} `İşləmir`")
                 else:
-                    status_text += f"\n🤖 **Bot :-**[{bot}](t.me/{bot}) " \
-                                 f"\n**⚜ Status :-** `Aktivdir` ✅\n"
+                    status_text += f"\n🤖 **Bot:**[{bot}](t.me/{bot}) " \
+                                 f"\n**⚜ Status:** Aktivdir ✅\n"
                 User.read_history(bot)
             limit = TIME_LIMIT // 60
             az_now = datetime.datetime.now(pytz.timezone('Asia/Baku')).strftime("%I:%M:%S %p %d/%m/%y")
@@ -47,10 +41,9 @@ def main():
             status_text += f"\n👨🏻‍🔧`Bu status Hər saat yenilənir`"
             try:
                 User.edit_message_text(chat_id=UPDATE_CHANNEL, message_id=MESSAGE_ID, text=status_text, disable_web_page_preview=hide_preview)
-                print(f"[INFO] hər şey edildi!  {limit} saat yatmaq...")
+                User.send_message(chat_id=BOT_OWNER, text=f"[INFO] Yoxlanış tamamlandı! {limit} saatlıq yatıram...")
             except Exception as error:
                 error_text = f"Status mesajını redaktə edərkən xəta.\nXəta:- {error}"
-                print(error_text)
                 User.send_message(chat_id=BOT_OWNER, text=error_text)
             time.sleep(TIME_LIMIT * 60)
 
